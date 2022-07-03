@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no, width = device-width">
+
+    <link href="{{ url_for('static',filename='css/style.css') }}" type="text/css" rel="stylesheet" media="screen" /> 
+    <script src="{{ url_for('static', filename='jquery-3.6.0.min.js') }}"></script>
+    
+
+</head>
+
+<body id="home">
+    <header> 
+    <div class="row"> 
+        <div class="large-8 medium-12 column">
+            {% if session['google_login'] %}
+            <nav> 
+            <ul> 
+                <li><a href="{{ url_for('bp_homepage.content_homepage') }}" class="scroll">Home</a></li>
+                {% if url_for(request.endpoint) != '/home' %}
+                    <li>/</li>
+                    <li>{% block breadcrumbs %}{% endblock %}</li>
+                {% endif %}
+             </ul>
+            </nav>
+            {% else %}
+            <nav> 
+            <ul> 
+                <li><a href="" class="scroll">PARDOC</a></li>
+            </ul>
+            </nav>
+            {% endif %}
+        </div>
+        <div class="large-12 column">
+            <div class="sep"> </div>
+        </div>
+    </div>
+    </header>
+    
+    <section class="services" id="services"> 
+    <div class="row"> 
+        <div class="large-6 medium-6 small-6 column">
+        <article class="service" style="opacity: 1;text-align: left;">
+            <div class="top">
+                {% if session['google_login'] %}
+                <h3><a href="{{ url_for('bp_profile.user_profile') }}">{{session['email']}}</a></h3>
+                {% else %}
+                <h3></h3>
+                {% endif %}
+            </div>
+        </article>
+        </div>
+        <div class="large-6 medium-6 small-6 column">
+        <article class="service" style="opacity: 1;text-align: right;">
+            <div class="top">
+                {% if session['google_login'] %}
+                
+                <h3><a href="{{ url_for('bp_login.logout') }}">Log Out</a></h3>
+                {% else %}
+                <h3>Please Login To Access This Feature, <a href="{{ url_for('bp_register.register') }}">Register now</a></h3>
+                {% endif %}
+            </div>
+        </article>
+        </div>
+    </div>
+    </section>
+
+    {% block content %}{% endblock %}
+
+    <footer>
+        <div class="row">
+            <div class="large-6 medium-12 column">
+                <ul class="social fa-ul"> 
+                    <li><a href="#"><span>Created by adimas , amara , dan ivandim Team<span></a></li>              
+                </ul>
+            </div>
+            <div class="large-6 medium-12 column">
+                <div class="copyright">
+                    {{ session['environment'] }} © BINUS 2022
+                </div>   
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

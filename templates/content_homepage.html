@@ -1,0 +1,30 @@
+{% extends 'template_base.html' %} 
+{% block title %}Homepage - Pardoc{% endblock %} 
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<section class="testimonials">
+<div class="row">
+	<div class="large-12 large-centered column">
+	<h3>ERROR</h3>
+	<span>
+	{% for message in messages %}
+	{{ message }}
+	{% endfor %}
+	</span><p></p>
+</div>
+</div>
+</section>
+{% endif %}
+{% endwith %}
+
+{{session}}
+
+
+
+<a href="{{ url_for('bp_self_diagnose.self_diagnose')}}">lets us diagnose you</a>
+<a href="https://www.w3schools.com/">URGENT ,konsultasi dengan dokter now</a>
+
+
+{% endblock %}

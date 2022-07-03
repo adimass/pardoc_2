@@ -1,0 +1,45 @@
+{% extends 'template_base.html' %} 
+{% block title %}Login - Pardoc{% endblock %} 
+{% block content %}
+
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<section class="testimonials">
+<div class="row">
+	<div class="large-12 large-centered column">
+	<h3>ERROR</h3>
+	<span>
+	{% for message in messages %}
+	{{ message }}
+	{% endfor %}
+	</span><p></p>
+</div>
+</div>
+</section>
+{% endif %}
+{% endwith %}
+
+<section class="contact" id="contact">
+
+              <form action="login" method="POST">
+                   <div class="large-6 column">
+                      <label>Email:</label>
+                       <input type="email" name="email" title="Email" class="defaultText defaultTextActive"  required> 
+                   </div>
+                  <div class="large-6 column">
+                      <label>Password:</label>
+                       <input type="password" name="password" title="Password" class="defaultText defaultTextActive"  required> 
+                  </div>
+                  <div class="large-12 column">
+                      <input type="submit" value="login" class="cta" >
+                  </div> 
+              </form>
+          </div>
+      </div>
+
+  
+  </section>
+
+
+{% endblock %}

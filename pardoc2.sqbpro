@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="D:/SKRIPSI/project_skripsi/pardoc.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1408"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,6:maingejala"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="gejala" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="60"/><column index="2" value="203"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">with data as (
+	
+	select *
+	from relasi
+	
+
+) , data2 as (
+
+	select DISTINCT(penyakitId)
+	from data
+	where gejalaId in ('G1')
+	
+),data3 as (
+
+select DISTINCT(gejalaId)
+from data join data2 on data.penyakitId = data2.penyakitId
+where gejalaId not in ('G1')
+
+
+)
+select g.gejalaId,nama
+from gejala g join data3 d on g.gejalaId = d.gejalaId;
+
+</sql><sql name="SQL 1 (1)">with data as (
+	
+	select *
+	from relasi
+	
+
+) , data2 as (
+
+	select DISTINCT(penyakitId)
+	from data
+	where gejalaId in ('G1','G2')
+	
+)
+
+-- select *
+from data join data2 on data.penyakitId = data2.penyakitId;
+
+
+with data as (
+select *
+from relasi
+where gejalaId in ('G1','G8','G14') and penyakitId in ('R2','R4')
+), data2 as (
+select *
+from data
+where gejalaId in ('G14')
+)
+select *
+from data2;
+
+with data as (
+select *
+from relasi
+where gejalaId in ('G1') 
+), data2 as (
+select *
+from data
+where gejalaId in ('G1')
+)
+select *
+from data2;
+
+
+
+
+
+</sql><sql name="SQL 3">insert into aa values ('R8',&quot;{'G4', 'G8'}&quot;);
+
+create table aa (penyakitId text, gejalaId text [] );
+
+
+create table relasi2 ( penyakitId string, gejalaid json1 );
+
+insert into relasi2 values ('R1',json('{&quot;gejala&quot;:[&quot;G14&quot;,&quot;G15&quot;,&quot;G24&quot;,&quot;G25&quot;,&quot;G26&quot;,&quot;G27&quot;]}'))
+
+select *
+from relasi2
+where json_extract( gejalaid, '$.value' ) in ('G4') ;
+
+select *
+from relasi2
+where gejalaid like '%G2%' and gejalaid not like '%G1%'
+
+
+delete from relasi2
+where penyakitId like 'R3'
+</sql><sql name="SQL 4">with data as (
+	
+	select *
+	from relasi
+	where penyakitId in ('R2', 'R3', 'R4', 'R9')
+	
+
+) select *
+from data;
+
+
+select *
+from gejala</sql><current_tab id="0"/></tab_sql></sqlb_project>

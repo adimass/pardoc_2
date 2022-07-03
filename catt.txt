@@ -1,0 +1,15 @@
+{% if  session['role'] == 'user' %} 
+<a href="https://www.w3schools.com/">lets us diagnose you</a>
+<a href="https://www.w3schools.com/">URGENT ,konsultasi dengan dokter now</a>
+
+{% elif session['role'] == 'dokter' %}
+<a href="https://www.w3schools.com/">insert penyakit</a>
+<a href="https://www.w3schools.com/">insert gejala</a>
+<a href="https://www.w3schools.com/">chat</a>
+
+
+{% elif session['role'] == 'admin' %}
+<a href="https://www.w3schools.com/">insert doktor</a>
+<a href="https://www.w3schools.com/">see penyakit</a>
+
+{% endif %}

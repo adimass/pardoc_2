@@ -1,0 +1,45 @@
+{% extends 'template_base.html' %} 
+{% block title %}Doktor - Pardoc{% endblock %} 
+{% block content %}
+
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<section class="testimonials">
+<div class="row">
+	<div class="large-12 large-centered column">
+	<h3>ERROR</h3>
+	<span>
+	{% for message in messages %}
+	{{ message }}
+	{% endfor %}
+	</span><p></p>
+</div>
+</div>
+</section>
+{% endif %}
+{% endwith %}
+
+
+
+
+<head>
+<title>lala</title>
+</head>
+
+
+<body>
+
+<h1>This is a Heading</h1>
+<p>This is a paragraph.</p>
+
+
+
+<a href="https://www.w3schools.com/">insert penyakit</a>
+<a href="https://www.w3schools.com/">insert gejala</a>
+<a href="https://www.w3schools.com/">chat</a>
+
+</body>
+
+
+{% endblock %}
