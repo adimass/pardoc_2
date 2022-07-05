@@ -42,11 +42,6 @@ def self_diagnose():
         sakit = str(penyakit)[1:-1]
         gejala = p_true + f_true
         gejala = str(gejala)[1:-1]
-
-        print("=========================")
-        print(penyakit)
-        print(gejala)
-        print("=========================")
             
         query ="""
             
@@ -63,27 +58,6 @@ def self_diagnose():
             
             """%(str(sakit),str(gejala))
 
-        print(query)
-
-
-        # if len(p_true) > 0 and len(f_true) == 0:
-        #     query ='''
-        #         select *
-        #         from gejala
-        #         where gejalaId = 'G2'
-        #         '''
-        # elif len(f_true) > 0 and len(p_true) == 0:
-        #     query ='''
-        #         select *
-        #         from gejala
-        #         where gejalaId = 'G3'
-        #         '''
-        # else :
-        #     query ='''
-        #         select *
-        #         from gejala
-        #         where gejalaId = 'G4'
-        #         '''
     
     gejala = db.df_query(query)
     if len(gejala) == 0:
@@ -141,15 +115,6 @@ def answer_diagnose():
             session['false'] = gejala_false
             
 
-    # if len(session['flag']) == 1 or len(session['flag']) == 0:
-    #     return 'dapet'
-    
-    print(len(session['flag']))
-
-    # if len(session['flag']) == 1:
-
-    #    return redirect(url_for('bp_self_diagnose.result_diagnose'))
-
     print(session['flag'])
     return redirect(url_for('bp_self_diagnose.self_diagnose'))
    
@@ -158,9 +123,7 @@ def answer_diagnose():
 def result_diagnose():
 
 
-    print(session['flag'])
-    print(session['true'])
-    print(session['false'])
+ 
     if 'gejalaId' in session:
         session.pop('gejalaId')
         session.pop('true')

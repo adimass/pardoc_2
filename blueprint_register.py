@@ -43,9 +43,14 @@ def register_user():
 
     insert = """
     
-    insert into users values('%s','%s','%s','%s','%s')
+    insert into users values('%s','%s','%s','%s','%s','','','','','')
 
     """%(str(userid),str(name),str(psw),str(role),str(email))
+
+    print(insert)
+
     db.execute_query(insert)
+
+    
 
     return redirect("/")
