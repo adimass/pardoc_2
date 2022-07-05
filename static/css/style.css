@@ -1,39 +1,12 @@
-
-/* h3 {
-
-    color:aqua;
+.headerSection {
+  background-color: #3AB0FF;
 }
 
-body {
-    background: #BA68C8;
-  }
-  
-.form-control:focus {
-box-shadow: none;
-border-color: #BA68C8;
+.homepageTitle {
+  align-items: flex-start;
+  vertical-align: middle;
 }
 
-.profile-button {
-background: #BA68C8;
-box-shadow: none;
-border: none;
+.emailText {
+  color: red;
 }
-
-.profile-button:hover {
-background: #682773;
-}
-
-.profile-button:focus {
-background: #682773;
-box-shadow: none;
-}
-
-.profile-button:active {
-background: #682773;
-box-shadow: none;
-}
-
-.back:hover {
-color: #682773;
-cursor: pointer;
-} */
