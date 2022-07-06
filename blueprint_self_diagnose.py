@@ -62,32 +62,12 @@ def self_diagnose():
             where g.gejalaId not in (%s)
             
             """%(str(sakit),str(gejala))
-
-        print(query)
-
-
-        # if len(p_true) > 0 and len(f_true) == 0:
-        #     query ='''
-        #         select *
-        #         from gejala
-        #         where gejalaId = 'G2'
-        #         '''
-        # elif len(f_true) > 0 and len(p_true) == 0:
-        #     query ='''
-        #         select *
-        #         from gejala
-        #         where gejalaId = 'G3'
-        #         '''
-        # else :
-        #     query ='''
-        #         select *
-        #         from gejala
-        #         where gejalaId = 'G4'
-        #         '''
     
     gejala = db.df_query(query)
+
     if len(gejala) == 0:
         return redirect(url_for('bp_self_diagnose.result_diagnose'))
+
     gejalaId = gejala.iloc[0]['gejalaId']
     pertanyaan = gejala.iloc[0]['pertanyaan']
 
@@ -98,9 +78,8 @@ def self_diagnose():
 def answer_diagnose():
     jawaban =  request.form.get('pilihan')
     gejalaId = request.args.get("gejalaId")
+
     flag = session['flag']
-    print(flag)
-    print(gejalaId)
     tag = []
 
     if len(flag) != 1:

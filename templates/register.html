@@ -19,7 +19,7 @@
 {% endif %}
 {% endwith %}
 
-<section class="contact" id="contact">
+<!-- <section class="contact" id="contact">
 
     <form action="register-users" method="post" enctype="multipart/form-data" >    			
  
@@ -48,7 +48,48 @@
     </form>
 
 
-</section>
+</section> -->
+
+<body>
+  <div class="container"
+    style="position: absolute;left: 0;right: 0;top: 50%;transform: translateY(-50%);-ms-transform: translateY(-50%);-moz-transform: translateY(-50%);-webkit-transform: translateY(-50%);-o-transform: translateY(-50%);">
+    <div class="row mb-5">
+      <div class="col-md-8 col-xl-6 text-center mx-auto">
+        <h2>Register</h2>
+        <p class="w-lg-50">Sebelum memulai diagnosa , bikin akun dulu yuk!</p>
+      </div>
+    </div>
+    <div class="row d-flex d-xl-flex justify-content-center justify-content-xl-center">
+      <div class="col-sm-12 col-lg-10 col-xl-9 col-xxl-7 bg-white shadow-lg" style="border-radius: 5px;">
+        <div class="p-5">
+          <div class="text-center">
+            <h4 class="text-dark mb-4">Create an Account!</h4>
+          </div>
+          <form class="user" action="register-users" enctype="multipart/form-data" method="post">
+            <div class="mb-3"><input class="form-control form-control-user" type="text" name="name" id="name" placeholder="Username"
+                required /></div>
+            <div class="mb-3"><input id="email" class="form-control form-control-user" type="email" name="email"
+                placeholder="Email Address" required /></div>
+            <div class="row mb-3">
+              <div class="col-sm-6 mb-3 mb-sm-0"><input id="psw" class="form-control form-control-user"
+                  type="password" placeholder="Password" name="psw" required /></div>
+              <div class="col-sm-6"><input id="psw-repeat" class="form-control form-control-user" type="password"
+                  placeholder="Repeat Password" name="psw-repeat" required /></div>
+            </div>
+            <div class="row mb-3">
+              <p id="emailErrorMsg" class="text-danger" style="display: none;">Paragraph</p>
+              <p id="passwordErrorMsg" class="text-danger" style="display: none;">Paragraph</p>
+            </div><button id="submitBtn" class="btn btn-primary d-block btn-user w-100" type="submit">Register
+              Account</button>
+            <hr />
+          </form>
+          <div class="text-center"><a class="small" href="{{ url_for('bp_login.login') }}">Already have an account? Login!</a></div>
+        </div>
+      </div>
+    </div>
+    <div></div>
+  </div>
+</body>
 
 
 
