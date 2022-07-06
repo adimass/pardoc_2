@@ -3,6 +3,7 @@ import requests
 import json
 import database as db
 import pandas as pd
+from flask_paginate import Pagination, get_page_parameter
 
 bp_profile = Blueprint("bp_profile",__name__)
 
@@ -45,6 +46,96 @@ def update_users():
     """%(string[:-1],userId)
     db.execute_query(query)
     return redirect("/user-profile")
+
+
+@bp_profile.route('/list_user', methods=['POST',"GET"])
+def list_users():
+
+    query = '''
+    select *
+    from users
+    where role like 'user'
+    '''
+    all_user = db.df_query(query)
+    list_user = all_user.values.tolist()
+    return render_template('content_admin_list_user.html',list_user=list_user)
+
+
+@bp_profile.route('/delete_list_user', methods=['POST',"GET"])
+def delete_list_users():
+
+    userId = request.args.get("userId")
+    print(userId)
+
+    query = """
+    delete from users
+    where userId like '%s'
+    """%(userId)
+
+    db.execute_query(query)
+
+    return redirect("/list_user")
+
+@bp_profile.route('/list_penyakit', methods=['POST',"GET"])
+def list_penyakit():
+
+    # page = request.args.get('page', 1, type=int)
+
+    # query = '''
+    # select *
+    # from penyakit
+    # '''
+    # all_penyakit = db.df_query(query)
+    # list_penyakit = all_penyakit.values.tolist()
+    # list_penyakit = list_penyakit.paginate(page=page, per_page=5)
+
+    # print(list_penyakit)
+
+
+
+    search = False
+    q = request.args.get('q')
+    if q:
+        search = True
+
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+
+    query = '''
+    select *
+    from penyakit
+    '''
+    all_penyakit = db.df_query(query)
+    list_penyakit = all_penyakit.values.tolist()
+
+    i=(page-1)*5
+    penyakit_page = list_penyakit[i:i+5]
+
+
+    # pagination = Pagination(page=page, total=len(list_penyakit), record_name='list_penyakit')
+    pagination = Pagination(page=page,per_page=5, total=len(list_penyakit), search=search, record_name='List')
+
+    return render_template('content_admin_list_penyakit.html',penyakit = penyakit_page, pagination=pagination,show_single_page=True)
+
+@bp_profile.route('/list_gejala', methods=['POST',"GET"])
+def list_gejala():
+
+    query = '''
+    select *
+    from gejala
+    '''
+    all_gejala = db.df_query(query)
+    list_gejala = all_gejala.values.tolist()
+
+    print(list_gejala)
+
+    return render_template('content_admin_list_gejala.html',gejala = list_gejala)
+
+@bp_profile.route('/list_drug', methods=['POST',"GET"])
+def list_drug():
+
+
+
+    return render_template('content_admin_list_drug.html')
 
 
 # for i in hasil.items():

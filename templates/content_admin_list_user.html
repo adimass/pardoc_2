@@ -1,0 +1,30 @@
+{% extends 'template_base.html' %} 
+{% block title %}List User{% endblock %} 
+{% block content %}
+
+
+
+    <div id="view"> 
+            <div id="container">
+
+            {% for i in list_user %}
+                <ul>
+                    <!-- row 01 -->
+                    <li class="clearfix">
+                            <h2>{{i[1]}}</h2>
+                            <span class="jobtype">{{i[0]}}</span>
+                    </li>
+
+                    <a href="{{ url_for('bp_profile.delete_list_users',userId = i[0]) }}" class="btn btn-primary">delete</a>
+                    
+                    
+
+                </div>
+            </div>
+            {% endfor %}
+
+
+
+</div>   
+
+{% endblock %}

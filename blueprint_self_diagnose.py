@@ -115,8 +115,6 @@ def answer_diagnose():
             gejala_false.append(gejalaId)
             session['false'] = gejala_false
             
-
-    print(session['flag'])
     return redirect(url_for('bp_self_diagnose.self_diagnose'))
    
 
@@ -124,11 +122,37 @@ def answer_diagnose():
 def result_diagnose():
 
 
- 
-    if 'gejalaId' in session:
-        session.pop('gejalaId')
-        session.pop('true')
-        session.pop('false')
+    derita = session['true']
+    print(derita)
+
+    data = session['flag']
+    print(data[0]['penyakitId'])
 
 
-    return 'oke'
+    sql ="""
+    
+        select *
+        from penyakit
+        where penyakitId like '%s'
+    
+    
+    """%(data[0]['penyakitId'])
+
+
+
+
+    print(sql)
+    penyakit = db.df_query(sql)
+    print(penyakit)
+
+
+    nama_penyakit = penyakit.iloc[0]['name']
+    level_penyakit = penyakit.iloc[0]['level']
+
+    print(nama_penyakit)
+    print(level_penyakit)
+
+
+
+
+    return render_template('content_result_self_diagnose.html',nama_penyakit=nama_penyakit,level_penyakit = level_penyakit)
