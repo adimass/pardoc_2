@@ -23,20 +23,10 @@
 
 
 
-<head>
-<title>lala</title>
-</head>
-
-
-<body>
-
-<h1>This is a Heading</h1>
-<p>This is a paragraph.</p>
-
-
-
-<a href="https://www.w3schools.com/">insert doktor</a>
-<a href="https://www.w3schools.com/">see penyakit</a>
+<a href="{{ url_for('bp_profile.list_users')}}">list user</a>
+<a href="{{ url_for('bp_profile.list_penyakit')}}">list disease</a>
+<a href="{{ url_for('bp_profile.list_gejala')}}">list symptoms</a>
+<a href="{{ url_for('bp_profile.list_drug')}}">list drug</a>
 
 </body>
 

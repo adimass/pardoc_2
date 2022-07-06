@@ -19,9 +19,6 @@ load_dotenv(dotenv_path=dotenv_path)
 SERVER_RUN = os.getenv('run_server')
 DATABASE = os.getenv('db_name')
 
-from blueprint_login import bp_login
-app.register_blueprint(bp_login)
-
 from blueprint_register import bp_register
 app.register_blueprint(bp_register)
 

@@ -1,0 +1,34 @@
+{% extends 'template_base.html' %}
+{% block title %}Self Diagnose{% endblock %} 
+{% block content %} 
+
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<section class="testimonials">
+<div class="row">
+	<div class="large-12 large-centered column">
+	<h3>ERROR</h3>
+	<span>
+	{% for message in messages %}
+	{{ message }}
+	{% endfor %}
+	</span><p></p>
+</div>
+</div>
+</section>
+{% endif %}
+{% endwith %}
+
+{{session}}
+
+
+<h2>nama penyakit : {{nama_penyakit}}</h2>
+<h2>level : {{level_penyakit}}</h2>
+<h2></h2>
+<h2></h2>
+<h2></h2>
+<h2></h2>
+<h2></h2>
+<h2></h2>
+{% endblock %}

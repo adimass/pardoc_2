@@ -1,0 +1,37 @@
+{% extends 'template_base.html' %} 
+{% block title %}List Penyakit{% endblock %} 
+{% block content %}
+
+
+<div id="view"> 
+
+    <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>NAMA PENYAKIT</th>
+            <th>LEVEL</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in penyakit %}
+            <tr>
+              <td>{{ loop.index + pagination.skip }}</td>
+              <td>{{ i[1] }}</td>
+              <td>{{ i[3] }}</td>
+              <td><a href="{{ url_for('bp_profile.delete_penyakit',penyakitId = i[0]) }}" class="btn btn-primary">delete</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+    
+      {{ pagination.info|safe }}
+
+      {{ pagination.links }} 
+      
+    
+
+</div>   
+
+
+{% endblock %}
