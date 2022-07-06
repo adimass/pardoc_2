@@ -60,8 +60,10 @@ def self_diagnose():
 
     
     gejala = db.df_query(query)
+
     if len(gejala) == 0:
         return redirect(url_for('bp_self_diagnose.result_diagnose'))
+
     gejalaId = gejala.iloc[0]['gejalaId']
     pertanyaan = gejala.iloc[0]['pertanyaan']
 
@@ -72,9 +74,8 @@ def self_diagnose():
 def answer_diagnose():
     jawaban =  request.form.get('pilihan')
     gejalaId = request.args.get("gejalaId")
+
     flag = session['flag']
-    print(flag)
-    print(gejalaId)
     tag = []
 
     if len(flag) != 1:
