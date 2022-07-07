@@ -19,9 +19,6 @@ load_dotenv(dotenv_path=dotenv_path)
 SERVER_RUN = os.getenv('run_server')
 DATABASE = os.getenv('db_name')
 
-from blueprint_register import bp_register
-app.register_blueprint(bp_register)
-
 
 @app.errorhandler(Exception)
 def server_error(err):
@@ -51,6 +48,9 @@ app.register_blueprint(bp_profile)
 
 from blueprint_self_diagnose import bp_self_diagnose
 app.register_blueprint(bp_self_diagnose)
+
+from blueprint_register import bp_register
+app.register_blueprint(bp_register)
 
 if __name__ == '__main__':
 

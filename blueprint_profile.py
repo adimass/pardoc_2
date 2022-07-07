@@ -198,6 +198,25 @@ def add_gejala():
         restricted_message = ""
         return render_template('login.html')
 
+    name = request.form.get("name")
+    pertanyaan = request.form.get("pertanyaan")
+
+    query="""
+    
+    select count(*)
+    from gejala
+    
+    """
+    id = db.execute_query_one(query)
+
+    id = id+1
+    id = 'G'+str(id)
+    
+    query="""
+    insert into gejala values ('%s','%s','%s')
+    """%(str(id),str(name),str(pertanyaan))
+    db.execute_query(query)
+
     return render_template('content_admin_add_gejala.html')
 
 @bp_profile.route('/list_drug', methods=['POST',"GET"])

@@ -14,45 +14,37 @@
 </head>
 
 <body id="home">
-
-    <header>
-        <nav class="navbar navbar-expand-md py-3">
-            <div class="container"><a class="navbar-brand d-flex align-items-center" href="#"></a><button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-6"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-                <div id="navcol-6" class="collapse navbar-collapse flex-grow-0 order-md-first">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item"><a class="nav-link active" href="#">PARDOC</a></li>
-                    </ul>
-                </div>
-                <div class="d-none d-md-block"></div>
+       <header id="head">
+        {% if session['google_login'] %}
+        <nav style="background-color: #F87474;">
+            <div class="container-fluid"> 
+                <ul class="nav justify-content-center">
+                    <li class="nav-item"><a class="nav-link" href="/home"><h3>PARDOC</h3></a></li>
+              </ul>
             </div>
         </nav>
-    </header>
-    
-    <!-- <section class="services" id="services">
-        <div class="row">
-            <div class="large-6 medium-6 small-6 column">
-                <article class="service" style="opacity: 1;text-align: left;">
-                    <div class="top">
-                        {% if session['google_login'] %}
-                        <h3><a href="{{ url_for('bp_profile.user_profile') }}">{{session['email']}}</a></h3>
-                        {% else %}
-                        <h3></h3>
-                        {% endif %}
-                    </div>
-                </article>
+        {%else%}
+        <nav >
+            <div class="container-fluid"> 
+                <ul class="nav justify-content-center">
+                    <li class="nav-item"><a class="nav-link " href="/home" style="color: #F87474; padding-top: 50px;"><h3>PARDOC</h3></a></li>
+              </ul>
             </div>
-        </div>
-    </section> -->
-
-    
+        </nav>
+        {%endif%}
+    </header>
 
     {% block content %}{% endblock %}
 
-    <!-- <footer class="footerDefault text-center">
+    <footer class="footerDefault text-center">
         <div class="container text-muted py-4 py-lg-5">
             <p class="mb-0">Copyright © 2022 Binus</p>
         </div>
-    </footer> -->
+    </footer>
+
+    <!-- <footer class="mt-auto text-white-50">
+        <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
+      </footer> -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>

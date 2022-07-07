@@ -13,3 +13,20 @@
 <a href="https://www.w3schools.com/">see penyakit</a>
 
 {% endif %}
+
+
+ <!-- <section class="services" id="services">
+        <div class="row">
+            <div class="large-6 medium-6 small-6 column">
+                <article class="service" style="opacity: 1;text-align: left;">
+                    <div class="top">
+                        {% if session['google_login'] %}
+                        <h3><a href="{{ url_for('bp_profile.user_profile') }}">{{session['email']}}</a></h3>
+                        {% else %}
+                        <h3></h3>
+                        {% endif %}
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section> -->
