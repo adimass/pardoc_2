@@ -121,30 +121,19 @@ def answer_diagnose():
 @bp_self_diagnose.route('/result_diagnose', methods=['POST','GET'])
 def result_diagnose():
 
-
     derita = session['true']
     print(derita)
-
     data = session['flag']
     print(data[0]['penyakitId'])
-
-
     sql ="""
-    
         select *
         from penyakit
         where penyakitId like '%s'
-    
-    
     """%(data[0]['penyakitId'])
-
-
-
 
     print(sql)
     penyakit = db.df_query(sql)
     print(penyakit)
-
 
     nama_penyakit = penyakit.iloc[0]['name']
     level_penyakit = penyakit.iloc[0]['level']

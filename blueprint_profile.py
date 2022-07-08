@@ -143,7 +143,7 @@ def delete_penyakit():
 @bp_profile.route('/add_penyakit', methods=['POST',"GET"])
 def add_penyakit():
 
-    return 'oke'
+    return render_template('content_admin_add_penyakit.html')
 
 
 @bp_profile.route('/list_gejala', methods=['POST',"GET"])
