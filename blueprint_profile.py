@@ -6,7 +6,6 @@ import pandas as pd
 from flask_paginate import Pagination, get_page_parameter
 
 PER_PAGES = 5
-
 bp_profile = Blueprint("bp_profile",__name__)
 
 @bp_profile.route("/user-profile",methods=["POST","GET"])
@@ -36,7 +35,6 @@ def update_users():
     if "google_login" not in session:
         restricted_message = ""
         return render_template('login.html')
-
     hasil = request.form.to_dict(flat=False)
     string = ""
     for i in hasil.items():
@@ -77,17 +75,16 @@ def delete_list_users():
     if "google_login" not in session:
         restricted_message = ""
         return render_template('login.html')
-
     userId = request.args.get("userId")
-
     query = """
     delete from users
     where userId like '%s'
     """%(userId)
-
     db.execute_query(query)
 
     return redirect("/list_user")
+
+#################################################################################penyakit
 
 @bp_profile.route('/list_penyakit', methods=['POST',"GET"])
 def list_penyakit():
@@ -121,39 +118,25 @@ def delete_penyakit():
     if "google_login" not in session:
         restricted_message = ""
         return render_template('login.html')
-
     penyakitId = request.args.get("penyakitId")
     query = """
     delete from penyakit
     where penyakitId like '%s'
     """%(penyakitId)
-
     db.execute_query(query)
-
     query = """
     delete from relasi 
     where penyakitId like '%s'
     """%(penyakitId)
-
     db.execute_query(query)
-
 
     return redirect("/list_penyakit")
 
-@bp_profile.route('/add_penyakit', methods=['POST',"GET"])
-def add_penyakit():
-
-    return render_template('content_admin_add_penyakit.html')
-
-
-@bp_profile.route('/list_gejala', methods=['POST',"GET"])
-def list_gejala():
-
+@bp_profile.route('/page_add_penyakit', methods=['POST',"GET"])
+def page_add_penyakit():
     if "google_login" not in session:
         restricted_message = ""
         return render_template('login.html')
-
-    page = request.args.get(get_page_parameter(), type=int, default=1)
 
     query = '''
     select *
@@ -162,11 +145,56 @@ def list_gejala():
     all_gejala = db.df_query(query)
     list_gejala = all_gejala.values.tolist()
 
+    return render_template('content_admin_add_penyakit.html',gejala=list_gejala)
+
+@bp_profile.route('/add_penyakit', methods=['POST',"GET"])
+def add_penyakit():
+    if "google_login" not in session:
+        restricted_message = ""
+        return render_template('login.html')
+
+    data = request.form.getlist('gejalabox')
+    name = request.form.get("name")
+    keterangan = request.form.get("keterangan")
+    level = request.form.get("level")
+    query="""
+    select count(*)
+    from penyakit
+    """
+    id = db.execute_query_one(query)
+    id = id+1
+    id = 'R'+str(id)
+    query="""
+    insert into penyakit values('%s','%s','%s','%s','')
+    """%(id,name,keterangan,level)
+    db.execute_query(query)
+    for i in data:
+        query = """
+        insert into relasi values ('%s','%s')
+        """%(id,i)
+        db.execute_query(query)
+
+    return redirect('/list_penyakit')
+
+
+#################################################################################gejala
+
+@bp_profile.route('/list_gejala', methods=['POST',"GET"])
+def list_gejala():
+
+    if "google_login" not in session:
+        restricted_message = ""
+        return render_template('login.html')
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    query = '''
+    select *
+    from gejala
+    '''
+    all_gejala = db.df_query(query)
+    list_gejala = all_gejala.values.tolist()
     i=(page-1)*PER_PAGES
     gejala_page = list_gejala[i:i+5]
     pagination = Pagination(page=page,per_page=PER_PAGES, total=len(list_gejala), record_name='List')
-
-
 
     return render_template('content_admin_list_gejala.html',gejala = gejala_page,pagination = pagination)
 
@@ -183,7 +211,6 @@ def delete_gejala():
     where gejalaId like '%s'
     """%(gejalaId)
     db.execute_query(query)
-
     query = """
     delete from relasi
     where gejalaId like '%s'
@@ -191,33 +218,37 @@ def delete_gejala():
     db.execute_query(query)
     return redirect("/list_gejala")
 
+@bp_profile.route('/page_add_gejala', methods=['POST',"GET"])
+def page_add_gejala():
+    if "google_login" not in session:
+        restricted_message = ""
+        return render_template('login.html')
+
+    return render_template('content_admin_add_gejala.html')
+
 
 @bp_profile.route('/add_gejala', methods=['POST',"GET"])
 def add_gejala():
     if "google_login" not in session:
         restricted_message = ""
         return render_template('login.html')
-
     name = request.form.get("name")
     pertanyaan = request.form.get("pertanyaan")
-
     query="""
-    
     select count(*)
     from gejala
-    
     """
     id = db.execute_query_one(query)
-
     id = id+1
     id = 'G'+str(id)
-    
     query="""
     insert into gejala values ('%s','%s','%s')
     """%(str(id),str(name),str(pertanyaan))
     db.execute_query(query)
 
-    return render_template('content_admin_add_gejala.html')
+    return redirect('/list_gejala')
+
+#######################################################drug
 
 @bp_profile.route('/list_drug', methods=['POST',"GET"])
 def list_drug():
@@ -226,7 +257,6 @@ def list_drug():
         return render_template('login.html')
 
     return render_template('content_admin_list_drug.html')
-
 
 # for i in hasil.items():
 #     if len(i[1][0]) > 0 :

@@ -22,6 +22,8 @@
 
   {{ pagination.links }} 
 
-  <a href="{{ url_for('bp_profile.add_gejala') }}" class="btn btn-dark">Add Gejala</a>
+  {% if session['role'] == 'dokter' %}
+  <a href="{{ url_for('bp_profile.page_add_gejala') }}" class="btn btn-dark">Add Gejala</a>
+  {% endif %}
 
 {% endblock %}

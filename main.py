@@ -6,11 +6,15 @@ import pandas as pd
 from pathlib import Path
 from dotenv import load_dotenv
 import sqlite3
+from flask_socketio import SocketIO, send
+from uuid import uuid4
+
 
 app = Flask(__name__)
 app.secret_key = b'XPfUfGyVOG27419oLKG51o0TMBKfSTJS9nmypRzM'
 app.config['PERMANENT_SESSION_LIFETIME'] =  timedelta(minutes=30)
 SESSION_REFRESH_EACH_REQUEST = True
+socketio = SocketIO(app)
 
 
 #this is for 
@@ -25,9 +29,14 @@ def server_error(err):
     app.logger.exception(err)
     return "Error server, please contact a-team", 500
 
+
+@socketio.on('message')
+def handleMessage(msg):
+    print('Massage' + msg)
+    send(msg, broadcast=True)
+
 @app.route("/")
 def content_main():
-
 
     if "google_login" not in session:
         return render_template('login.html')
@@ -52,7 +61,14 @@ app.register_blueprint(bp_self_diagnose)
 from blueprint_register import bp_register
 app.register_blueprint(bp_register)
 
+from blueprint_chat import bp_chat
+app.register_blueprint(bp_chat)
+
 if __name__ == '__main__':
 
-    print(SERVER_RUN)
-    app.run('localhost', 8080,debug=True)
+    # print(SERVER_RUN)
+    # app.run('localhost', 8080,debug=True)
+    
+    socketio.run(app,debug=True)
+
+    # socketio.run(app, host='localhost',port=8080,debug=True)

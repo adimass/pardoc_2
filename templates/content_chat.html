@@ -1,0 +1,41 @@
+    {% extends 'template_base.html' %} 
+    {% block title %}List User{% endblock %} 
+    {% block content %}
+
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+        
+        var socket = io.connect('http://127.0.0.1:5000');
+
+        socket.on('connect', function() {
+            socket.send('User has Connected');
+        });
+
+        socket.on('message', function(msg){
+            $("#messages").append('<li>'+msg+'</li>');
+            console.log('received massage')
+        });
+
+        $('#sendbutton').on('click',function(msg){
+                socket.send($('#myMessage').val());
+                $('#myMessage').val('');
+
+        });
+
+
+
+
+    });
+
+
+
+    </script>
+
+    
+    <ul id="messages" ></ul>
+    <input type="text" id="myMessage">
+    <button id="sendbutton" >Send</button>
+
+
+    {% endblock %}

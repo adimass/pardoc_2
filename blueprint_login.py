@@ -16,7 +16,6 @@ def login():
     from users
     where email like '%s' and pass like '%s'
     '''%(str(email),str(password))
-    
     user = db.df_query(query)
 
     if not user.empty:
@@ -27,7 +26,6 @@ def login():
             if str(i[0]) != 'pass':
                 session[i[0]] = i[1]
     else :
-
         print('user not found')
 
     return redirect("/")  

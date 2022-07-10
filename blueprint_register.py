@@ -3,6 +3,7 @@ import requests
 import json
 import database as db
 from datetime import datetime
+from uuid import uuid4
 
 bp_register = Blueprint('bp_register', __name__)
 
@@ -40,12 +41,13 @@ def register_user():
     hasil = hasil+1
     userid = 'usr'+str(tl)+str(hasil)
     role = 'user'
+    socket = uuid4().hex
 
     insert = """
     
-    insert into users values('%s','%s','%s','%s','%s','','','','','')
+    insert into users values('%s','%s','%s','%s','%s','','','','','','%s')
 
-    """%(str(userid),str(name),str(psw),str(role),str(email))
+    """%(str(userid),str(name),str(psw),str(role),str(email),str(socket))
 
     print(insert)
 
