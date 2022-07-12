@@ -20,15 +20,30 @@
 {% endif %}
 {% endwith %}
 
+<div class="container">
+	<div class="btnListUser col-12">
+		<a href="{{ url_for('bp_profile.list_users')}}">List User</a>
+	</div>
+	
+	<div class="row justify-content-center">
+		<div class="col-4">
+			<div class="btnListDisease w-100">
+				<a href="{{ url_for('bp_profile.list_penyakit')}}">List Disease</a>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="btnListSymtoms w-100">
+				<a href="{{ url_for('bp_profile.list_gejala')}}">List Symptoms</a>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="btnListDrug w-100">
+				<a href="{{ url_for('bp_profile.list_drug')}}">List Drug</a>
+			</div>
+		</div>
+	</div>
 
-
-
-<a href="{{ url_for('bp_profile.list_users')}}">list user</a>
-<a href="{{ url_for('bp_profile.list_penyakit')}}">list disease</a>
-<a href="{{ url_for('bp_profile.list_gejala')}}">list symptoms</a>
-<a href="{{ url_for('bp_profile.list_drug')}}">list drug</a>
-
-
+</div>
 
 
 {% endblock %}

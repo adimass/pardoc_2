@@ -3,25 +3,26 @@
 {% block content %}
 
 
-{% for i in gejala %}
 
-<div class="card">
-    <div class="card-header">
-      SYMPTOMPS
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">{{ i[1] }}</h5>
-      <p class="card-text">{{i[2]}}</p>
-      <a href="{{ url_for('bp_profile.delete_gejala',gejalaId = i[0]) }}" class="btn btn-danger">delete</a>
+  <div class="container">
+    <div class="row justify-content-center">
+      {% for i in gejala %}
+      <div class="cardListSymptoms">
+        <h3>{{ i[1] }}</h3>
+        <h3>{{i[2]}} ?</h3>
+        <a href="{{ url_for('bp_profile.delete_gejala',gejalaId = i[0]) }}" class="btn btn-danger">delete</a>
+      </div>
+      {% endfor %}
+      <div class="text-center mt-4 mb-2">
+        {{ pagination.info|safe }}
+      </div>
+      <div class="wrappagination mb-4">
+        {{ pagination.links }} 
+      </div>
+
+      <a href="{{ url_for('bp_profile.add_gejala') }}" class="btn btn-primary">Add Gejala</a>
     </div>
   </div>
 
-  {% endfor %}
-
-  {{ pagination.info|safe }}
-
-  {{ pagination.links }} 
-
-  <a href="{{ url_for('bp_profile.add_gejala') }}" class="btn btn-dark">Add Gejala</a>
 
 {% endblock %}

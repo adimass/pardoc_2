@@ -27,7 +27,7 @@ def user_profile():
     user = db.df_query(query)
     parsed = user.to_json(orient="records")
     user_json = json.loads(parsed)
-
+    
     return render_template('content_user_profile.html',user = user_json[0])
 
 @bp_profile.route('/update-users', methods=['POST',"GET"])
@@ -38,6 +38,7 @@ def update_users():
         return render_template('login.html')
 
     hasil = request.form.to_dict(flat=False)
+    
     string = ""
     for i in hasil.items():
         if len(i[1][0]) > 0 :
