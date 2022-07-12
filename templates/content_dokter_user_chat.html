@@ -1,0 +1,31 @@
+{% extends 'template_base.html' %} 
+{% block title %}List User{% endblock %} 
+{% block content %}
+
+
+{{ pasien }}
+
+{% if pasien %}
+
+
+    {% for i in pasien %}
+
+
+        <a href="{{ url_for('bp_chat.content_private_chat',userId = i[0]) }}">
+            <div class="card">
+                <div class="card-header">
+                {{ i[7] }}
+                </div>
+                <div class="card-body">
+                <h5 class="card-title">{{i[1]}}</h5>
+                <p class="card-text">{{i[4]}}</p>
+                </div>
+            </div>
+        </a>
+
+  {% endfor %}
+
+{% endif %}
+
+
+{% endblock %}
