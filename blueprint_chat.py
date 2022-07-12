@@ -2,7 +2,6 @@ from flask import Blueprint, render_template, redirect, url_for, send_file,sessi
 import requests
 import json
 import database as db
-from flask_socketio import SocketIO, send
 from datetime import datetime
 
 bp_chat = Blueprint("bp_chat",__name__)
