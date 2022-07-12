@@ -5,21 +5,15 @@
 
 
 {% if array_chat %}
-
-
     {% for i in array_chat %}
-
         <div class="container">
             <p>{{ i[3] }}</p>
             <span class="time-right">{{ i[5] }}</span>
         </div>
-
     {% endfor %}
-
 {% endif %}
 
 {% if session['role'] == user %}
-
 
     <div class="chatbox-area">
         <form action="/send" method="post">
