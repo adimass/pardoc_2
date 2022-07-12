@@ -23,12 +23,47 @@
 {{session}}
 
 
-<h2>nama penyakit : {{nama_penyakit}}</h2>
+<!-- <h2>nama penyakit : {{nama_penyakit}}</h2>
 <h2>level : {{level_penyakit}}</h2>
+
 <h2></h2>
 <h2></h2>
 <h2></h2>
 <h2></h2>
 <h2></h2>
-<h2></h2>
+<h2></h2> -->
+
+<article>
+  <div class="container"
+  style="position: absolute;left: 0;right: 0;top: 50%;transform: translateY(-50%);-ms-transform: translateY(-50%);-moz-transform: translateY(-50%);-webkit-transform: translateY(-50%);-o-transform: translateY(-50%);">
+  <div class="row d-flex d-xl-flex justify-content-center justify-content-xl-center">
+    <div class="col-sm-12 col-lg-10 col-xl-9 col-xxl-7 bg-white shadow-lg" style="border-radius: 5px;">
+      <div class="p-5">
+        <div class="text-center">
+          <h4 class="text-dark mb-4">PRE-DIAGNOSE SUMMARY</h4>
+        </div>
+		<div class="text-center">
+			<h4 class="text-dark mb-4">--''--</h4>
+		</div>
+		<div class="card" style="width: 18rem;">
+			<div class="card-body">
+			  <h5 class="card-title">Special title treatment</h5>
+			  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+			  <a href="#" class="btn btn-primary">Go somewhere</a>
+			</div>
+		  </div>
+      </div>
+    </div>
+  </div>
+  <div></div>
+</div>
+
+<a href="{{ url_for('bp_self_diagnose.save_diagnose',nama_penyakit=nama_penyakit,level_penyakit = level_penyakit,keterangan_penyakit=keterangan_penyakit,date_penyakit=date_penyakit,penyakitId = penyakitId )}}">save</a>
+
+</article>
+   
+  
+
+
+
 {% endblock %}

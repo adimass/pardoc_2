@@ -1,0 +1,35 @@
+{% extends 'template_base.html' %} 
+{% block title %}List User{% endblock %} 
+{% block content %}
+
+
+
+{% if array_chat %}
+    {% for i in array_chat %}
+        <div class="container">
+            <p>{{ i[3] }}</p>
+            <span class="time-right">{{ i[5] }}</span>
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% if session['role'] == user %}
+
+    <div class="chatbox-area">
+        <form action="/send" method="post">
+            <textarea placeholder="Talk to me!" class="chatbox" name="chat" id="chat" resize: "none" minlength="2"></textarea>
+            <input class="submit-button" type="submit" value="send">
+        </form>
+    </div>
+
+{% else %}
+
+<div class="chatbox-area">
+    <form action="{{ url_for('bp_chat.content_send_chat',user= user) }}" method="post">
+        <textarea placeholder="Talk to me!" class="chatbox" name="chat" id="chat" resize: "none" minlength="2"></textarea>
+        <input class="submit-button" type="submit" value="send">
+    </form>
+</div>
+{% endif %}
+
+{% endblock %}

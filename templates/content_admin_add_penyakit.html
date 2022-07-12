@@ -15,21 +15,40 @@
             <div class="text-center">
               <h4 class="text-dark mb-4">NEW DISEASE</h4>
             </div>
-            <form class="user" action="add_gejala" enctype="multipart/form-data" method="post">
+            <form class="user" action="add_penyakit" enctype="multipart/form-data" method="post">
               <div class="form-floating mb-3"><input class="form-control form-control-user" type="text" name="name" id="name" placeholder="Name of Symptoms"
                   required />
                 
                   <label for="name">Input Name of Disease</label>
                 </div>
                 
-              <div class="form-floating mb-3"><input class="form-control form-control-user" type="text" id="pertanyaan" name="pertanyaan"
+              <div class="form-floating mb-3"><input class="form-control form-control-user" type="text" id="keterangan" name="keterangan"
                   placeholder="Question for user" required />
-                  <label for="pertanyaan">Input Question for user</label>
+                  <label for="pertanyaan">Input Description of Disease</label>
                 </div>
-              <div class="row mb-3">
+              <div class="row mb-2">
                 <p id="emailErrorMsg" class="text-danger" style="display: none;">Paragraph</p>
                 <p id="passwordErrorMsg" class="text-danger" style="display: none;">Paragraph</p>
-              </div><button id="submitBtn" class="btn btn-primary d-block btn-user w-100" type="submit">Add Symptoms</button>
+              </div>
+                <div class="row mb-4 ml-1">
+                  <div class="boxfloat">
+                    {% for i in gejala %}
+                    <input type="checkbox"  name="gejalabox" id="gejalabox" value="{{i[0]}}" style="text-transform: lowercase;"> {{i[1]}} <br />
+                    {% endfor %}
+                </div>
+              </div>
+              <div class="row mb-4 ml-1">
+                <select class="form-select" aria-label="Default select example"  name="level" id="level">
+                  <option selected>Open this select menu</option>
+                  <option value="HIGH">High</option>
+                  <option value="MEDIUM">Medium</option>
+                  <option value="LOW">Low</option>
+                </select>
+
+                
+              </div>
+              
+              <button id="submitBtn" class="btn btn-primary d-block btn-user w-100" type="submit">Add Symptoms</button>
               <hr />
             </form>
           </div>

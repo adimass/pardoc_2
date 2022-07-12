@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, send_file,sessi
 import requests
 import json
 import database as db
+from datetime import datetime
 bp_self_diagnose = Blueprint('bp_self_diagnose', __name__)
 
 @bp_self_diagnose.route('/self_diagnose')
@@ -120,9 +121,9 @@ def answer_diagnose():
 
 @bp_self_diagnose.route('/result_diagnose', methods=['POST','GET'])
 def result_diagnose():
+    
 
     derita = session['true']
-    print(derita)
     data = session['flag']
     print(data[0]['penyakitId'])
     sql ="""
@@ -131,17 +132,101 @@ def result_diagnose():
         where penyakitId like '%s'
     """%(data[0]['penyakitId'])
 
-    print(sql)
+    
     penyakit = db.df_query(sql)
-    print(penyakit)
 
+    
+  
+    penyakitId = data[0]['penyakitId']
     nama_penyakit = penyakit.iloc[0]['name']
     level_penyakit = penyakit.iloc[0]['level']
+    keterangan_penyakit = penyakit.iloc[0]['keterangan']
+    date_penyakit = datetime.date(datetime.now())
+
+    if level_penyakit == 'LOW':
+
+        query = """
+
+                select *
+                from obat
+                where penyakitId like '%s'
+            
+            """%(data[0]['penyakitId'])
+
+        obat = db.df_query(query)
+        print(obat)
+
+
+    if 'gejalaId' in session:
+        session.pop('gejalaId')
+        session.pop("true")
+        session.pop('false')
+
+
+
+
+    return render_template('content_result_self_diagnose.html',nama_penyakit=nama_penyakit,level_penyakit = level_penyakit,keterangan_penyakit=keterangan_penyakit,date_penyakit=date_penyakit,penyakitId = data[0]['penyakitId'])
+
+
+@bp_self_diagnose.route('/save_diagnose', methods=['POST','GET'])
+def save_diagnose():
+    nama_penyakit =  request.args.get('nama_penyakit')
+    level_penyakit = request.args.get("level_penyakit")
+    date_penyakit = request.args.get("date_penyakit")
+    penyakitId = request.args.get("penyakitId")
+
+    query = '''
+    
+    select count(*)
+    from hasil
+    
+    '''
+
+    tl = datetime.today().strftime('%Y%m%d')
+    hasil = db.execute_query_one(query)
+    hasil = hasil+1
+    hasilId = 'hsl'+str(tl)+str(hasil)
+    
+    print(hasilId)
+    
+    if level_penyakit == 'LOW':
+
+        query = """
+
+            select *
+            from obat
+            where penyakitId like '%s'
+        
+        """%(penyakitId)
+
+        print(query)
+        
+        query = """
+        
+        insert into hasil values('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')
+        
+        
+        """%(hasilId,session['userId'],penyakitId,'',session['name'],level_penyakit,date_penyakit,session['gender'],nama_penyakit,'')
+
+        print(query)
+
+    else:
+        query = """
+        
+        insert into hasil values('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')
+        
+        
+        """%(hasilId,session['userId'],penyakitId,'',session['name'],level_penyakit,date_penyakit,session['gender'],nama_penyakit,'')
+
+        print(query)
+
+        
+
+
 
     print(nama_penyakit)
     print(level_penyakit)
+    print(date_penyakit)
+    print(penyakitId)
 
-
-
-
-    return render_template('content_result_self_diagnose.html',nama_penyakit=nama_penyakit,level_penyakit = level_penyakit)
+    return redirect('/home')
