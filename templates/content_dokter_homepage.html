@@ -26,5 +26,48 @@
 <a href="{{ url_for('bp_profile.list_drug')}}">list drug</a>
 
 
+<!-- <head>
+<title>lala</title>
+</head>
+
+
+<body>
+
+<h1>This is a Heading</h1>
+<p>This is a paragraph.</p>
+
+
+
+<a href="https://www.w3schools.com/">insert penyakit</a>
+<a href="https://www.w3schools.com/">insert gejala</a>
+<a href="https://www.w3schools.com/">chat</a>
+
+</body> -->
+<div class="container">
+	<div class="btnListUser col-12">
+		<a href="{{ url_for('bp_profile.list_users')}}">Chat with Patient</a>
+	</div>
+	
+	<div class="row justify-content-center">
+		<div class="col-4">
+			<div class="btnListDisease w-100">
+				<a href="{{ url_for('bp_profile.list_penyakit')}}">Insert Disease</a>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="btnListSymtoms w-100">
+				<a href="{{ url_for('bp_profile.list_gejala')}}">Insert Symptoms</a>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="btnListDrug w-100">
+				<a href="{{ url_for('bp_profile.list_drug')}}">Insert Drug</a>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
 
 {% endblock %}

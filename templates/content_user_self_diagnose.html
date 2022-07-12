@@ -20,16 +20,28 @@
 {% endif %}
 {% endwith %}
 
-{{session}}
+<!-- {{session}} -->
 
-<h2>{{pertanyaan}} ?</h2>
-<form action = "{{ url_for('bp_self_diagnose.answer_diagnose',gejalaId = gejalaId) }}" method = "POST" class="notfound-search">
-<input type="radio" id="ya" name="pilihan" value="ya">
-<label for="ya">Ya</label>
-<input type="radio" id="tidak" name="pilihan" value="tidak">
-<label for="tidak">Tidak</label><br>
-	<button type="submit" value = "submit" >Submit</button>
-</form>
+<div class="row justify-content-center">
+	<div class="cardQuestion text-center">
+		<h2>{{pertanyaan}} ?</h2>
+		<form action = "{{ url_for('bp_self_diagnose.answer_diagnose',gejalaId = gejalaId) }}" method = "POST" class="notfound-search">
+		<div class="row justify-content-center m-4">
+			<div class="col-4">
+				<input type="radio" id="ya" name="pilihan" value="ya">
+				<label for="ya">Ya</label>
+			</div>
+			<div class="col-4">
+				<input type="radio" id="tidak" name="pilihan" value="tidak">
+				<label for="tidak">Tidak</label><br>
+			</div>
+		</div>
+			<button class="btnSubmit" type="submit" value = "submit" >Submit</button>
+		</form>
+	</div>
+</div>
+
+
 
 
 

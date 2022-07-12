@@ -19,12 +19,28 @@
 {% endif %}
 {% endwith %}
 
-{{session}}
+<!-- {{session}} -->
 
 
 
-<a href="{{ url_for('bp_self_diagnose.self_diagnose')}}">lets us diagnose you</a>
-<a href="{{ url_for('bp_chat.content_private_chat') }}">URGENT ,konsultasi dengan dokter now</a>
+<img src="https://dummyimage.com/600x180/000/fff.png" class="position-relative" style="margin: 36px 20px;" alt="">
+<div>
+	<div class="btnDiagnose position-absolute">
+		<a href="{{ url_for('bp_self_diagnose.self_diagnose')}}">Diognose Now</a>
+	</div>
+</div>
+
+<div class="row p-3 justify-content-center">
+	<a class="btnHistory col-5 p-5 mt-3 m-3" href="{{ url_for('bp_self_diagnose.self_diagnose')}}">History</a>
+
+	<a class="btnConsul col-5 p-5 mt-3 m-3" href="https://www.w3schools.com/">URGENT ,talk with doctor now</a>
+</div>
+
+
+
+
+
+
 
 
 {% endblock %}

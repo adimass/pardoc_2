@@ -4,13 +4,15 @@
 
 
 <div id="view"> 
-
-    <table>
+  <div class="container">
+    <div class="row justify-content-center">
+      <table class="mt-4">
         <thead>
           <tr>
-            <th>#</th>
+            <th>NO</th>
             <th>NAMA PENYAKIT</th>
             <th>LEVEL</th>
+            <th>ACTION</th>
           </tr>
         </thead>
         <tbody>
@@ -19,15 +21,24 @@
               <td>{{ loop.index + pagination.skip }}</td>
               <td>{{ i[1] }}</td>
               <td>{{ i[3] }}</td>
-              <td><a href="{{ url_for('bp_profile.delete_penyakit',penyakitId = i[0]) }}" class="btn btn-primary">delete</a></td>
+              <td><a href="{{ url_for('bp_profile.delete_penyakit',penyakitId = i[0]) }}" class="btn btn-danger">DELETE</a></td>
             </tr>
           {% endfor %}
         </tbody>
-    </table>
+      </table>
+      
+      <div class="text-center mt-4 mb-2">
+        {{ pagination.info|safe }}
+      </div>
+      <div class="wrappagination mb-4">
+        {{ pagination.links }} 
+      </div>
+        
+        <a href="{{ url_for('bp_profile.add_penyakit') }}" class="btn btn-primary">Add Penyakit</a>
+    </div>
     
-      {{ pagination.info|safe }}
-
-      {{ pagination.links }} 
+  </div>
+    
       
       {% if session['role'] == 'dokter' %}
       <a href="{{ url_for('bp_profile.page_add_penyakit') }}" class="btn btn-dark">Add Penyakit</a>
