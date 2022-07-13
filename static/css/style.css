@@ -140,7 +140,7 @@ a:link{
 }
 
 .btnDiagnose{
-  background: #3ab0ff;
+  background: #F87474;
   border: 4px solid white;
   border-radius: 20px;
   width: 255px;
@@ -179,7 +179,11 @@ a:link{
 
 .btnConsul a{
   display: table-cell;
-  vertical-align: middle;
+  vertical-align: middle; 
+}
+
+.btnConsul h3{
+  color:#F9F2ED;
 }
 
 .btnConsul:hover{
@@ -201,6 +205,9 @@ a:link{
 .btnHistory a{
   display: table-cell;
   vertical-align: middle;
+}
+.btnHistory h3{
+  color:#F9F2ED;
 }
 
 .btnHistory:hover{
@@ -224,7 +231,7 @@ a:link{
   font-size: 40px;
   margin: 70px 0 70px;
   border-radius: 10px;
-  background-color: #3ab0ff;
+  background-color: #F87474;
   height: 240px;
   text-align: center;
   display: table;
@@ -239,7 +246,7 @@ a:link{
 }
 
 .btnListUser:hover{
-  background-color: #F87474;
+  background-color: #FFB562;
   color: #000;
 }
 
@@ -287,6 +294,7 @@ a:link{
 .btnListSymtoms:hover{
   background-color: #F87474;
   color: #000;
+  
 }
 
 .btnListDrug {
@@ -299,6 +307,7 @@ a:link{
   display: table;
   text-decoration: none;
   transition: all ease-out 0.6s;
+  color:#F87474;
 }
 
 .btnListDrug  a{
@@ -428,6 +437,36 @@ th {
 
 .btnUpdate:hover{
   background-color: #F87474;
+}
+
+.time-right {
+  float: right;
+ 
+}
+
+/* Style time text */
+.time-left {
+  float: left;
+  color: #aaa;
+}
+
+.time-right span{
+  color: #aaa;
+}
+
+
+
+.cardChat{
+  
+  border-radius: 10px;
+  width: 80vw;
+  padding: 20px 45px;
+  margin: 15px 0 15px;
+}
+
+.cardChat a{
+  float: right;
+  margin-top: -60px;
 }
 
 .cardResult{
