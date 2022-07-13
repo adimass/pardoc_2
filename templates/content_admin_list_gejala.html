@@ -1,36 +1,58 @@
 {% extends 'template_base.html' %} 
-{% block title %}List Gejala{% endblock %} 
+{% block title %}List Symptoms{% endblock %} 
 {% block content %}
 
 
 
   <div class="container">
     <div class="row justify-content-center">
-      {% for i in gejala %}
-      <div class="cardListSymptoms">
+      <!-- {% for i in gejala %}
+      <div class="cardListSymptoms shadow-lg">
         <h3>{{ i[1] }}</h3>
         <h3>{{i[2]}} ?</h3>
-        <a href="{{ url_for('bp_profile.delete_gejala',gejalaId = i[0]) }}" class="btn btn-danger">delete</a>
+        <a href="{{ url_for('bp_profile.delete_gejala',gejalaId = i[0]) }}" class="btn btn-danger">DELETE</a>
       </div>
-      {% endfor %}
+      {% endfor %} -->
+
+      <table class="tableDisease mt-4">
+        <thead>
+          <tr>
+            <th>NO</th>
+            <th>NAMA PENYAKIT</th>
+            <th>PERTANYAAN</th>
+            <th>ACTION</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in gejala %}
+            <tr>
+              <td>{{ loop.index + pagination.skip }}</td>
+              <td>{{ i[1] }}</td>
+              <td>{{ i[2] }}</td>
+              <td><a href="{{ url_for('bp_profile.delete_penyakit',penyakitId = i[0]) }}" class="btn btn-danger">DELETE</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+
+
+
+
+
+
       <div class="text-center mt-4 mb-2">
-        {{ pagination.info|safe }}
+        {{ pagination.info }}
       </div>
       <div class="wrappagination mb-4">
         {{ pagination.links }} 
       </div>
 
-      <a href="{{ url_for('bp_profile.add_gejala') }}" class="btn btn-primary">Add Gejala</a>
+      {% if session['role'] == 'dokter' %}
+      <a href="{{ url_for('bp_profile.page_add_gejala') }}" class="btn btn-dark">Add Gejala</a>
+      {% endif %}
     </div>
   </div>
 
-
-  {{ pagination.info|safe }}
-
-  {{ pagination.links }} 
-
-  {% if session['role'] == 'dokter' %}
-  <a href="{{ url_for('bp_profile.page_add_gejala') }}" class="btn btn-dark">Add Gejala</a>
-  {% endif %}
 
 {% endblock %}
