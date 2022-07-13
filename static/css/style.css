@@ -351,10 +351,12 @@ a:link{
   width: 105px;
   background-color: #ffb562;
   transition: all ease 0.6s;
+  text-decoration: none;
 }
 
 .btnSubmit:hover{
   background-color: #F87474;
+  text-decoration: none;
 }
 
 .cardListUser{
@@ -426,4 +428,38 @@ th {
 
 .btnUpdate:hover{
   background-color: #F87474;
+}
+
+.cardResult{
+  border: 2px solid;
+  border-radius: 10px;
+  padding: 20px 80px;
+  margin: 30px 0 30px;
+  max-width: 840px;
+}
+
+.btnResultDiagnose{
+  font-size: 24px;
+  border-radius: 10px;
+  background-color: #3ab0ff;
+  height: 90px;
+  text-align: center;
+  display: table;
+  text-decoration: none;
+  transition: all ease-out 0.6s;
+}
+
+.btnResultDiagnose  a{
+  color: white;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.btnResultDiagnose:hover{
+  background-color: #F87474;
+  color: #000;
+}
+
+.btnResultDiagnose  a:hover{
+  text-decoration: none;
 }

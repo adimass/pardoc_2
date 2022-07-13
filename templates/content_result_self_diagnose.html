@@ -20,7 +20,7 @@
 {% endif %}
 {% endwith %}
 
-{{session}}
+<!-- {{session}} -->
 
 
 <!-- <h2>nama penyakit : {{nama_penyakit}}</h2>
@@ -33,36 +33,42 @@
 <h2></h2>
 <h2></h2> -->
 
-<article>
-  <div class="container"
-  style="position: absolute;left: 0;right: 0;top: 50%;transform: translateY(-50%);-ms-transform: translateY(-50%);-moz-transform: translateY(-50%);-webkit-transform: translateY(-50%);-o-transform: translateY(-50%);">
-  <div class="row d-flex d-xl-flex justify-content-center justify-content-xl-center">
-    <div class="col-sm-12 col-lg-10 col-xl-9 col-xxl-7 bg-white shadow-lg" style="border-radius: 5px;">
-      <div class="p-5">
-        <div class="text-center">
-          <h4 class="text-dark mb-4">PRE-DIAGNOSE SUMMARY</h4>
-        </div>
+
+<div class="container">
+  <div class="row justify-content-center">
+	 <div class="cardResult">
 		<div class="text-center">
-			<h4 class="text-dark mb-4">--''--</h4>
+			<h2>PRE-DIAGNOSE SUMMARY</h2>
+			<h3>Name</h3>
 		</div>
-		<div class="card" style="width: 18rem;">
-			<div class="card-body">
-			  <h5 class="card-title">Special title treatment</h5>
-			  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-			  <a href="#" class="btn btn-primary">Go somewhere</a>
+	
+		<p>Date</p>
+		<div class="cardResult">
+			<div class="text-center">
+				<h3>Name Disease</h3>
+				<h4>LOW/HIGH</h4>
 			</div>
-		  </div>
-      </div>
-    </div>
+			
+			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+			</p>
+			
+			<div class="cardResult text-center">
+				<h3>CURE</h3>
+			</div>
+			<div class="btnResultDiagnose w-100">
+				<a href="">
+					btnResultDiagnose
+				</a>
+			</div>
+		</div>
+
+		<div class="row justify-content-center text-center">
+			<a href="{{ url_for('bp_self_diagnose.save_diagnose',nama_penyakit=nama_penyakit,level_penyakit = level_penyakit,keterangan_penyakit=keterangan_penyakit,date_penyakit=date_penyakit,penyakitId = penyakitId )}}" class="btnSubmit">SAVE</a>
+		</div>
+		
+	 </div>
   </div>
-  <div></div>
 </div>
-
-<a href="{{ url_for('bp_self_diagnose.save_diagnose',nama_penyakit=nama_penyakit,level_penyakit = level_penyakit,keterangan_penyakit=keterangan_penyakit,date_penyakit=date_penyakit,penyakitId = penyakitId )}}">save</a>
-
-</article>
-   
-  
 
 
 

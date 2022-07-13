@@ -18,11 +18,24 @@
 <body id="home">
        <header id="head">
         {% if session['google_login'] %}
-        <nav style="background-color: #F87474;">
-            <div class="container-fluid"> 
-                <ul class="">
-                    <li class="nav-item"><a class="nav-link" href="/home"><h3>PARDOC</h3></a></li>
-              </ul>
+        <nav class="navbar navbar-expand-lg" style="background-color: #F87474;">
+            <div class="container-fluid d-flex justify-content-between"> 
+                <a class="nav-link" href="/home"><h3>PARDOC</h3></a>
+
+                <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:black;">
+                          {{session.name}}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdownMenuLink">
+                          <li><a class="dropdown-item" href="#">History</a></li>
+                          <li><a class="dropdown-item" href="/user-profile">Update Profile</a></li>
+                          <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                </div>
             </div>
         </nav>
         {%else%}
@@ -30,7 +43,7 @@
             <div class="container-fluid"> 
                 <ul class="nav justify-content-center">
                     <li class="nav-item"><a class="nav-link" href="/home" style="color: #F87474; padding-top: 50px;"><h3>PARDOC</h3></a></li>
-              </ul>
+                </ul>
             </div>
         </nav>
         {%endif%}
