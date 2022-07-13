@@ -3,7 +3,11 @@ import requests
 import json
 import database as db
 from datetime import datetime
+from flask_paginate import Pagination, get_page_parameter
 bp_self_diagnose = Blueprint('bp_self_diagnose', __name__)
+
+
+PER_PAGES = 5
 
 @bp_self_diagnose.route('/self_diagnose')
 def self_diagnose():
@@ -140,6 +144,11 @@ def result_diagnose():
     keterangan_penyakit = penyakit.iloc[0]['keterangan']
     date_penyakit = datetime.date(datetime.now())
 
+    if 'gejalaId' in session:
+        session.pop('gejalaId')
+        session.pop("true")
+        session.pop('false')
+
     if level_penyakit == 'LOW':
 
         query = """
@@ -151,15 +160,11 @@ def result_diagnose():
             """%(data[0]['penyakitId'])
 
         obat = db.df_query(query)
-        print(obat)
+        obat_id = obat.iloc[0]['obatId']
+        obat_name = obat.iloc[0]['name']
+        obat_detail = obat.iloc[0]['keterangan']
 
-
-    if 'gejalaId' in session:
-        session.pop('gejalaId')
-        session.pop("true")
-        session.pop('false')
-
-
+        return render_template('content_result_self_diagnose.html',nama_penyakit=nama_penyakit,level_penyakit = level_penyakit,keterangan_penyakit=keterangan_penyakit,date_penyakit=date_penyakit,penyakitId = data[0]['penyakitId'],obat_name =obat_name,obat_detail=obat_detail,obat_id=obat_id)
 
 
     return render_template('content_result_self_diagnose.html',nama_penyakit=nama_penyakit,level_penyakit = level_penyakit,keterangan_penyakit=keterangan_penyakit,date_penyakit=date_penyakit,penyakitId = data[0]['penyakitId'])
@@ -173,10 +178,8 @@ def save_diagnose():
     penyakitId = request.args.get("penyakitId")
 
     query = '''
-    
     select count(*)
     from hasil
-    
     '''
 
     tl = datetime.today().strftime('%Y%m%d')
@@ -184,46 +187,50 @@ def save_diagnose():
     hasil = hasil+1
     hasilId = 'hsl'+str(tl)+str(hasil)
     
-    print(hasilId)
-    
     if level_penyakit == 'LOW':
-
-        query = """
-
-            select *
-            from obat
-            where penyakitId like '%s'
-        
-        """%(penyakitId)
-
-        print(query)
+        obat_name = request.args.get("obat_name")
+        obat_detail = request.args.get("obat_detail")
+        obat_id = request.args.get("obat_id")
         
         query = """
-        
         insert into hasil values('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')
+        """%(hasilId,session['userId'],penyakitId,obat_id,session['name'],level_penyakit,date_penyakit,session['gender'],nama_penyakit,obat_name)
         
-        
-        """%(hasilId,session['userId'],penyakitId,'',session['name'],level_penyakit,date_penyakit,session['gender'],nama_penyakit,'')
-
-        print(query)
 
     else:
         query = """
-        
         insert into hasil values('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')
-        
-        
         """%(hasilId,session['userId'],penyakitId,'',session['name'],level_penyakit,date_penyakit,session['gender'],nama_penyakit,'')
 
-        print(query)
-
+       
+    db.execute_query(query)
         
 
-
-
-    print(nama_penyakit)
-    print(level_penyakit)
-    print(date_penyakit)
-    print(penyakitId)
-
     return redirect('/home')
+
+
+
+
+@bp_self_diagnose.route('/list_history', methods=['POST','GET'])
+def list_history():
+
+
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    query="""
+    select * 
+    from hasil
+    where userId like '%s'
+    """%(session['userId'])
+
+    all_data = db.df_query(query)
+    list_data = all_data.values.tolist()
+    i=(page-1)*PER_PAGES
+    data_page = list_data[i:i+5]
+
+    print(data_page)
+    pagination = Pagination(page=page,per_page=PER_PAGES, total=len(list_data), record_name='List')
+
+    return render_template('content_history.html', data_pages = data_page,pagination = pagination)
+
+    
+    

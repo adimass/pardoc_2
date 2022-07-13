@@ -257,7 +257,80 @@ def list_drug():
         restricted_message = ""
         return render_template('login.html')
 
-    return render_template('content_admin_list_drug.html')
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    query = '''
+    select *
+    from obat
+    '''
+    all_obat = db.df_query(query)
+    list_obat = all_obat.values.tolist()
+    i=(page-1)*PER_PAGES
+    obat_page = list_obat[i:i+5]
+    pagination = Pagination(page=page,per_page=PER_PAGES, total=len(list_obat), record_name='List')
+
+    return render_template('content_admin_list_drug.html',obat = obat_page,pagination = pagination)
+ 
+@bp_profile.route('/delete_obat', methods=['POST',"GET"])
+def delete_obat():
+
+    if "google_login" not in session:
+        restricted_message = ""
+        return render_template('login.html')
+
+    obatId = request.args.get("obatId")
+    query = """
+    delete from obat
+    where obatId like '%s'
+    """%(obatId)
+    db.execute_query(query)
+
+    return redirect('/list_drug')
+
+@bp_profile.route('/page_add_obat', methods=['POST',"GET"])
+def page_add_obat():
+    if "google_login" not in session:
+        restricted_message = ""
+        return render_template('login.html')
+
+    query="""
+    
+    select penyakitId,name
+    from penyakit
+    
+    
+    """
+    df = db.df_query(query)
+    df = df.values.tolist()
+
+    return render_template('content_admin_add_obat.html',penyakit=df)
+
+@bp_profile.route('/add_obat', methods=['POST',"GET"])
+def add_obat():
+
+    name = request.form.get("name")
+    pertanyaan = request.form.get("pertanyaan")
+    penyakit = request.form.get("penyakit")
+
+    query="""
+    select count(*)
+    from obat
+    """
+    id = db.execute_query_one(query)
+    id = id+1
+    id = 'B'+str(id)
+    
+    
+    query ="""
+    
+    insert into obat values ("%s","%s","%s","%s")
+    
+    """%(id,penyakit,name,pertanyaan)
+
+    db.execute_query(query)
+
+    
+
+    return redirect('/list_drug')
 
 # for i in hasil.items():
 #     if len(i[1][0]) > 0 :

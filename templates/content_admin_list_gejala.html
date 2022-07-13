@@ -18,8 +18,8 @@
         <thead>
           <tr>
             <th>NO</th>
-            <th>NAMA PENYAKIT</th>
-            <th>PERTANYAAN</th>
+            <th>NAME SYMPTOMS</th>
+            <th>QUESTIONS OF SYMPTOMS</th>
             <th>ACTION</th>
           </tr>
         </thead>
@@ -29,7 +29,7 @@
               <td>{{ loop.index + pagination.skip }}</td>
               <td>{{ i[1] }}</td>
               <td>{{ i[2] }}</td>
-              <td><a href="{{ url_for('bp_profile.delete_penyakit',penyakitId = i[0]) }}" class="btn btn-danger">DELETE</a></td>
+              <td><a href="{{ url_for('bp_profile.delete_gejala',gejalaId = i[0]) }}" class="btn btn-danger">DELETE</a></td>
             </tr>
           {% endfor %}
         </tbody>
@@ -49,7 +49,7 @@
       </div>
 
       {% if session['role'] == 'dokter' %}
-      <a href="{{ url_for('bp_profile.page_add_gejala') }}" class="btn btn-dark">Add Gejala</a>
+      <a href="{{ url_for('bp_profile.page_add_gejala') }}" class="btn btn-dark">Add SYMPTOMS</a>
       {% endif %}
     </div>
   </div>

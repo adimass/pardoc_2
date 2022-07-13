@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, send_file,session
 import pandas as pd 
 import json
 import os
+import database as db
 
 bp_homepage= Blueprint('bp_homepage', __name__)
 @bp_homepage.route('/home')
@@ -13,7 +14,16 @@ def content_homepage():
         
     role = session['role']
     if role == 'user':
-        return render_template('content_homepage.html')
+
+        query="select * from hub where pasId like '%s'"%(session['userId'])
+        df = db.df_query(query)
+      
+
+        if len(df) == 0:
+            return render_template('content_homepage.html')
+        else:
+            print("haloha")
+            return render_template('content_homepage.html', chat=True)
     elif role == 'dokter':
         return render_template('content_dokter_homepage.html')
     else:
