@@ -134,9 +134,6 @@ def result_diagnose():
 
     
     penyakit = db.df_query(sql)
-
-    
-  
     penyakitId = data[0]['penyakitId']
     nama_penyakit = penyakit.iloc[0]['name']
     level_penyakit = penyakit.iloc[0]['level']

@@ -1,12 +1,12 @@
 {% extends 'template_base.html' %} 
-{% block title %}List Penyakit{% endblock %} 
+{% block title %}List Disease{% endblock %} 
 {% block content %}
 
 
 <div id="view"> 
   <div class="container">
     <div class="row justify-content-center">
-      <table class="mt-4">
+      <table class="tableDisease mt-4">
         <thead>
           <tr>
             <th>NO</th>
@@ -28,19 +28,20 @@
       </table>
       
       <div class="text-center mt-4 mb-2">
-        {{ pagination.info|safe }}
+        {{ pagination.info }}
       </div>
       <div class="wrappagination mb-4">
         {{ pagination.links }} 
       </div>
+      {% if session['role'] == 'dokter' %}
+      <a href="{{ url_for('bp_profile.page_add_penyakit') }}" class="btn btn-dark">Add Penyakit</a>
+      {% endif %}
     </div>
     
   </div>
     
       
-      {% if session['role'] == 'dokter' %}
-      <a href="{{ url_for('bp_profile.page_add_penyakit') }}" class="btn btn-dark">Add Penyakit</a>
-      {% endif %}
+      
     
 
 </div>   

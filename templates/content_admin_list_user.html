@@ -6,19 +6,34 @@
 
     <div id="view"> 
         <div id="container">
-            {% for i in list_user %}
+           
                 <!-- row 01 -->
                 <div class="row justify-content-center">
-                    <div class="cardListUser">
-                        <h3>NAME : {{i[1]}}</h3>
-                        <h3 class="jobtype">USER ID : {{i[0]}}</h3>
-                            
-                        <a href="{{ url_for('bp_profile.delete_list_users',userId = i[0]) }}" class="btn btn-danger">delete</a>
-                    </div>
+           
+                    <table class="tableDisease mt-4">
+                        <thead>
+                          <tr>
+                            <th>NO</th>
+                            <th>NAMA PENYAKIT</th>
+                            <th>LEVEL</th>
+                            <th>ACTION</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% for i in list_user %}
+                            <tr>
+                              <td>{{ loop.index}}</td>
+                              <td>{{ i[1] }}</td>
+                              <td>{{ i[0] }}</td>
+                              <td><a href="{{ url_for('bp_profile.delete_penyakit',penyakitId = i[0]) }}" class="btn btn-danger">DELETE</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                      </table>
                 </div>   
         </div>
     </div>
-            {% endfor %}
+            
 
 
 
